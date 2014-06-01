@@ -1,8 +1,8 @@
 #ifndef LUA_H
 #define LUA_H
 
+#include <string>
 #include <lua.hpp>
-#include "lib.h"
 
 class Lua {
 
@@ -12,14 +12,14 @@ public:
 	bool error;
 
 	Lua();
-	void loadSettings(int &width, int &height, double &viewportScale, bool &fullscreen, string &title, bool &limitFrames);
+	void loadSettings(int &width, int &height, double &viewportScale, bool &fullscreen, std::string &title, bool &limitFrames);
 
-	bool appVar(string var);
-	void appSetVar(string var, int value);
-	void appFunc(string func);
-	void appFunc(string func, int value);
+	bool appVar(std::string var);
+	void appSetVar(std::string var, int value);
+	void appFunc(std::string func);
+	void appFunc(std::string func, int value);
 
-	void registerTable(string tableName, const luaL_reg* functions);
+	void registerTable(std::string tableName, const luaL_reg* functions);
 	void registerTables();
 
 };

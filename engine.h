@@ -1,5 +1,5 @@
+#include <string>
 #include <SDL.h>
-#include "lib.h"
 #include "lua.h"
 
 class Engine {
@@ -14,18 +14,18 @@ public:
 	int height = 720;
 	double viewportScale = 1;
 	bool fullscreen = false;
-	string title;
+	std::string title;
 	bool limitFrames = true;
 	static int mousex;
 	static int mousey;
 	static int fps;
 	static int tps;
 
-	string luaRender = "render";
-	string luaTick = "tick";
-	string luaKeyDown = "keyDown";
-	string luaKeyUp = "keyUp";
-	string luaMouseDown = "mouseDown";
+	std::string luaRender = "render";
+	std::string luaTick = "tick";
+	std::string luaKeyDown = "keyDown";
+	std::string luaKeyUp = "keyUp";
+	std::string luaMouseDown = "mouseDown";
 
 	Engine();
 	void run();

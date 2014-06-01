@@ -1,4 +1,5 @@
 #include "engine.h"
+#include <iostream>
 #include <ctime>
 #include <glew.h>
 
@@ -10,13 +11,13 @@ int Engine::tps = 0;
 Engine::Engine() {
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		cout << SDL_GetError() << endl;
+		std::cout << SDL_GetError() << std::endl;
 		return;
 	}
 
 	window = SDL_CreateWindow("Hello World", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 480, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	if (window == nullptr) {
-		cout << SDL_GetError() << endl;
+		std::cout << SDL_GetError() << std::endl;
 		return;
 	}
 

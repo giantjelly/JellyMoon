@@ -1,5 +1,6 @@
 #include "lua.h"
 
+#include <iostream>
 #include <lua.hpp>
 #include "videoLua.h"
 #include "engine.h"
@@ -14,14 +15,14 @@ Lua::Lua() {
 	registerTables();
 
 	if (luaL_dofile(l, "main.lua") != 0) error = true;
-	if (lua_type(l, -1) == LUA_TSTRING) cout << lua_tostring(l, -1) << endl;
+	if (lua_type(l, -1) == LUA_TSTRING) std::cout << lua_tostring(l, -1) << std::endl;
 
 	//appSetVar("app.mouseX", 0);
 	//appSetVar("app.mouseY", 0);
-	cout << "Lua constructor called" << endl;
+	std::cout << "Lua constructor called" << std::endl;
 }
 
-bool Lua::appVar(string var) {
+bool Lua::appVar(std::string var) {
 
 	lua_getfield(l, LUA_GLOBALSINDEX, "app");
 	if (lua_istable(l, -1)) {
@@ -34,42 +35,42 @@ bool Lua::appVar(string var) {
 	return false;
 }
 
-void Lua::appSetVar(string var, int value) {
+void Lua::appSetVar(std::string var, int value) {
 
-	string str = var + " = " + to_string(value);
+	std::string str = var + " = " + std::to_string(value);
 
 	if (!error)
 	if (luaL_dostring(l, str.c_str()) != 0) {
-		if (lua_type(l, -1) == LUA_TSTRING) cout << lua_tostring(l, -1) << endl;
+		if (lua_type(l, -1) == LUA_TSTRING) std::cout << lua_tostring(l, -1) << std::endl;
 		error = true;
 	}
 }
 
-void Lua::appFunc(string func) {
+void Lua::appFunc(std::string func) {
 
-	string f = func + "()";
+	std::string f = func + "()";
 
 	//if (!error)
 	if (luaL_dostring(l, f.c_str()) != 0) {
-		cout << func << " : ";
-		if (lua_type(l, -1) == LUA_TSTRING) cout << lua_tostring(l, -1) << endl;
+		std::cout << func << " : ";
+		if (lua_type(l, -1) == LUA_TSTRING) std::cout << lua_tostring(l, -1) << std::endl;
 		error = true;
 	}
 }
 
-void Lua::appFunc(string func, int value) {
+void Lua::appFunc(std::string func, int value) {
 
-	string f = func + "(" + to_string(value) + ")";
+	std::string f = func + "(" + std::to_string(value) + ")";
 
 	//if (!error)
 	if (luaL_dostring(l, f.c_str()) != 0) {
-		cout << func << " : ";
-		if (lua_type(l, -1) == LUA_TSTRING) cout << lua_tostring(l, -1) << endl;
+		std::cout << func << " : ";
+		if (lua_type(l, -1) == LUA_TSTRING) std::cout << lua_tostring(l, -1) << std::endl;
 		error = true;
 	}
 }
 
-void Lua::loadSettings(int &width, int &height, double &viewportScale, bool &fullscreen, string &title, bool &limitFrames) {
+void Lua::loadSettings(int &width, int &height, double &viewportScale, bool &fullscreen, std::string &title, bool &limitFrames) {
 
 	if (appVar("width")) width = lua_tonumber(l, -1);
 	if (appVar("height")) height = lua_tonumber(l, -1);
@@ -80,7 +81,7 @@ void Lua::loadSettings(int &width, int &height, double &viewportScale, bool &ful
 	if (appVar("limitframes")) limitFrames = lua_toboolean(l, -1);
 }
 
-void Lua::registerTable(string tableName, const luaL_reg* functions) {
+void Lua::registerTable(std::string tableName, const luaL_reg* functions) {
 
 luaL_register(l, tableName.c_str(), functions);
 }
