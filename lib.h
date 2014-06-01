@@ -1,16 +1,11 @@
-/*using namespace std;
-#include <iostream>
+#ifndef LIB_H
+#define LIB_H
+
+using namespace std;
 #include <string>
+#include <iostream>
 
-#include <glew.h>
-#include <SDL.h>
-#include <SDL_image.h>*/
+void print(std::string str);
+double r();
 
-/*void print(string str) {
-
-	cout << str << endl;
-}
-
-double r() {
-	return (double)(rand() % 1000) / 1000.0;
-}*/
+#endif

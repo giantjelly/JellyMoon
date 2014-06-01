@@ -1,4 +1,8 @@
-/*#include <lua.hpp>
+#ifndef LUA_H
+#define LUA_H
+
+#include <lua.hpp>
+#include "videoLua.h"
 
 class Lua {
 
@@ -8,8 +12,8 @@ public:
 	bool error;
 
 	Lua();
-	void loadSettings();
-	
+	void loadSettings(int &width, int &height, double &viewportScale, bool &fullscreen, string &title, bool &limitFrames);
+
 	bool appVar(string var);
 	void appSetVar(string var, int value);
 	void appFunc(string func);
@@ -18,4 +22,6 @@ public:
 	void registerTable(string tableName, const luaL_reg* functions);
 	void registerTables();
 
-};*/
+};
+
+#endif

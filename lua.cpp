@@ -1,8 +1,8 @@
-/*#include "lib.h"
+#include "lua.h"
+
 #include <lua.hpp>
 #include "videoLua.h"
-#include "lua.h"
-#include "globals.h"
+#include "engine.h"
 
 Lua::Lua() {
 
@@ -16,10 +16,9 @@ Lua::Lua() {
 	if (luaL_dofile(l, "main.lua") != 0) error = true;
 	if (lua_type(l, -1) == LUA_TSTRING) cout << lua_tostring(l, -1) << endl;
 
-	loadSettings();
-
-	appSetVar("app.mouseX", 0);
-	appSetVar("app.mouseY", 0);
+	//appSetVar("app.mouseX", 0);
+	//appSetVar("app.mouseY", 0);
+	cout << "Lua constructor called" << endl;
 }
 
 bool Lua::appVar(string var) {
@@ -70,31 +69,20 @@ void Lua::appFunc(string func, int value) {
 	}
 }
 
-void Lua::loadSettings() {
+void Lua::loadSettings(int &width, int &height, double &viewportScale, bool &fullscreen, string &title, bool &limitFrames) {
 
-	if (appVar("viewportWidth")) VIEWPORTWIDTH = lua_tonumber(l, -1);
-	if (appVar("viewportHeight")) VIEWPORTHEIGHT = lua_tonumber(l, -1);
-	if (appVar("projectionWidth")) PROJECTIONWIDTH = lua_tonumber(l, -1);
-	if (appVar("projectionHeight")) PROJECTIONHEIGHT = lua_tonumber(l, -1);
-	if (appVar("fullscreen")) FULLSCREEN = lua_toboolean(l, -1);
-	if (appVar("title")) TITLE = lua_tostring(l, -1);
+	if (appVar("width")) width = lua_tonumber(l, -1);
+	if (appVar("height")) height = lua_tonumber(l, -1);
+	if (appVar("scale")) viewportScale = lua_tonumber(l, -1);
+	if (appVar("fullscreen")) fullscreen = lua_toboolean(l, -1);
+
+	if (appVar("title")) title = lua_tostring(l, -1);
+	if (appVar("limitframes")) limitFrames = lua_toboolean(l, -1);
 }
 
 void Lua::registerTable(string tableName, const luaL_reg* functions) {
 
-	luaL_register(l, tableName.c_str(), functions);
-}
-
-int mousex(lua_State* l) {
-
-	lua_pushnumber(l, MOUSEX);
-	return 1;
-}
-
-int mousey(lua_State* l) {
-
-	lua_pushnumber(l, MOUSEY);
-	return 1;
+luaL_register(l, tableName.c_str(), functions);
 }
 
 void Lua::registerTables() {
@@ -137,6 +125,10 @@ void Lua::registerTables() {
 			luaRenderSprite
 		},
 		{
+			"renderCircle",
+			luaRenderCircle
+		},
+		{
 			"loadTexture",
 			luaLoadTexture
 		},
@@ -148,16 +140,30 @@ void Lua::registerTables() {
 	};
 
 	static const luaL_reg luaInput[] = {
-		{
-			"mousex",
-			mousex
-		},
-		{
-			"mousey",
-			mousey
-		}
+	{
+		"mousex",
+		Engine::getMousex
+	},
+	{
+		"mousey",
+		Engine::getMousey
+	},
+	{ NULL, NULL }
+	};
+
+	static const luaL_reg luaJellyMoon[] = {
+	{
+		"frames",
+		Engine::getFrames
+	},
+	{
+		"ticks",
+		Engine::getTicks
+	},
+	{ NULL, NULL }
 	};
 
 	registerTable("video", luaVideo);
 	registerTable("input", luaInput);
-}*/
+	registerTable("jellymoon", luaJellyMoon);
+}
