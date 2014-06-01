@@ -1,5 +1,4 @@
 #include <glew.h>
-#include <SDL_image.h>
 #include "lib.h"
 
 void videoEnableTextures(bool enable);

@@ -1,8 +1,5 @@
 #include "videoLua.h"
 
-#include <lua.hpp>
-#include "video.h"
-
 int luaEnableTextures(lua_State* l) {
 
 bool enable = lua_toboolean(l, 1);

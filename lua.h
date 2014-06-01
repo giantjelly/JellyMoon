@@ -2,7 +2,7 @@
 #define LUA_H
 
 #include <lua.hpp>
-#include "videoLua.h"
+#include "lib.h"
 
 class Lua {
 

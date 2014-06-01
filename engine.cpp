@@ -1,5 +1,6 @@
 #include "engine.h"
 #include <ctime>
+#include <glew.h>
 
 int Engine::mousex = 0;
 int Engine::mousey = 0;
@@ -25,8 +26,6 @@ Engine::Engine() {
 }
 
 void Engine::run() {
-
-	
 
 	SDL_SetWindowTitle(window, title.c_str());
 	SDL_SetWindowSize(window, width*viewportScale, height*viewportScale);

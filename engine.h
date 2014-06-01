@@ -14,7 +14,7 @@ public:
 	int height = 720;
 	double viewportScale = 1;
 	bool fullscreen = false;
-	string title = "";
+	string title;
 	bool limitFrames = true;
 	static int mousex;
 	static int mousey;
