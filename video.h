@@ -10,7 +10,9 @@ void videoRotate(double angle);
 void videoColor(double r, double g, double b, double a);
 void videoRenderQuad(double left, double top, double right, double bottom);
 void videoRenderSprite(GLuint texture, double offsetX, double offsetY, double offsetWidth, double offsetHeight, double x, double y, double scale);
+void videoRenderSpriteRotated(GLuint texture, double offsetX, double offsetY, double offsetWidth, double offsetHeight, double x, double y, double scale, double centerx, double centery, double angle);
 void videoRenderCircle(double x, double y, double radius, double detailScale);
+void videoRenderElipse(double x, double y, double radiusx, double radiusy, double detailScale);
 GLuint videoLoadTexture(std::string file);
 
 void videoLoadIdentity();

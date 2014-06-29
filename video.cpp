@@ -85,6 +85,17 @@ void videoRenderSprite(GLuint texture, double offsetX, double offsetY, double of
 	glEnd();
 }
 
+void videoRenderSpriteRotated(GLuint texture, double offsetX, double offsetY, double offsetWidth, double offsetHeight, double x, double y, double scale, double centerx, double centery, double angle) {
+
+	videoPush();
+
+	videoTranslate(x, y, 0);
+	videoRotate(centerx, centery, angle);
+	videoRenderSprite(texture, offsetX, offsetY, offsetWidth, offsetHeight, 0, 0, scale);
+
+	videoPop();
+}
+
 void videoRenderCircle(double x, double y, double radius, double detailScale) {
 
 	int detail = 50*detailScale;
@@ -95,6 +106,21 @@ void videoRenderCircle(double x, double y, double radius, double detailScale) {
 
 		double rad = (((double)i/(double)detail)*360)*(3.14159 / 180.0);
 		glVertex3d( x+(cos(rad)*radius), y+(sin(rad)*radius), 0 );
+	}
+
+	glEnd();
+}
+
+void videoRenderElipse(double x, double y, double radiusx, double radiusy, double detailScale) {
+	
+	int detail = 50 * detailScale;
+
+	glBegin(GL_TRIANGLE_FAN);
+
+	for (int i = 0; i < detail; i++) {
+
+		double rad = (((double)i / (double)detail) * 360)*(3.14159 / 180.0);
+		glVertex3d(x + (cos(rad)*radiusx), y + (sin(rad)*radiusy), 0);
 	}
 
 	glEnd();

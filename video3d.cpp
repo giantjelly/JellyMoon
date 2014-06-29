@@ -1,6 +1,6 @@
 #include "video3d.h"
 
-void Video3d::renderSprite(GLuint texture, double sx, double sy, double sw, double sh,
+void Video3d::renderSprite(GLuint texture, double sxp, double syp, double swp, double shp,
 	double x0, double y0, double z0, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3) {
 
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -11,10 +11,10 @@ void Video3d::renderSprite(GLuint texture, double sx, double sy, double sw, doub
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);
 
-	double sx = sx / tw;
-	double sw = sw / tw;
-	double sy = sy / th;
-	double sh = sh / th;
+	double sx = sxp / tw;
+	double sw = swp / tw;
+	double sy = syp / th;
+	double sh = shp / th;
 
 	glBegin(GL_QUADS);
 

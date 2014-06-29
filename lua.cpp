@@ -126,8 +126,16 @@ void Lua::registerTables() {
 			luaRenderSprite
 		},
 		{
+			"renderSpriteRotated",
+			luaRenderSpriteRotated
+		},
+		{
 			"renderCircle",
 			luaRenderCircle
+		},
+		{
+			"renderElipse",
+			luaRenderElipse
 		},
 		{
 			"loadTexture",

@@ -96,6 +96,25 @@ int luaRenderSprite(lua_State* l) {
 	return 0;
 }
 
+int luaRenderSpriteRotated(lua_State* l) {
+
+	int texture = lua_tonumber(l, 1);
+	int offsetX = lua_tonumber(l, 2);
+	int offsetY = lua_tonumber(l, 3);
+	int offsetWidth = lua_tonumber(l, 4);
+	int offsetHeight = lua_tonumber(l, 5);
+	double x = lua_tonumber(l, 6);
+	double y = lua_tonumber(l, 7);
+	double scale = lua_tonumber(l, 8);
+	double centerx = lua_tonumber(l, 9);
+	double centery = lua_tonumber(l, 10);
+	double angle = lua_tonumber(l, 11);
+
+	videoRenderSpriteRotated(texture, offsetX, offsetY, offsetWidth, offsetHeight, x, y, scale, centerx, centery, angle);
+
+	return 0;
+}
+
 int luaRenderCircle(lua_State* l) {
 
 	double x = lua_tonumber(l, 1);
@@ -104,6 +123,19 @@ int luaRenderCircle(lua_State* l) {
 	double detailScale = lua_tonumber(l, 4);
 
 	videoRenderCircle(x, y, radius, detailScale);
+
+	return 0;
+}
+
+int luaRenderElipse(lua_State* l) {
+
+	double x = lua_tonumber(l, 1);
+	double y = lua_tonumber(l, 2);
+	double radiusx = lua_tonumber(l, 3);
+	double radiusy = lua_tonumber(l, 4);
+	double detailScale = lua_tonumber(l, 5);
+
+	videoRenderElipse(x, y, radiusx, radiusy, detailScale);
 
 	return 0;
 }
