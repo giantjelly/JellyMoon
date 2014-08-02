@@ -96,6 +96,24 @@ void videoRenderSpriteRotated(GLuint texture, double offsetX, double offsetY, do
 	videoPop();
 }
 
+void videoRenderTriangleSprite(GLuint texture, double sx, double sy, double sw, double sh, double x, double y, double width, double height) {
+
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glEnable(GL_TEXTURE_2D);
+
+	int tw;
+	int th;
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);
+
+	double xStart = offsetX / tw;
+	double xEnd = (offsetX + offsetWidth) / tw;
+	double yStart = offsetY / th;
+	double yEnd = (offsetY + offsetHeight) / th;
+	double width = offsetWidth*scale;
+	double height = offsetHeight*scale;
+}
+
 void videoRenderCircle(double x, double y, double radius, double detailScale) {
 
 	int detail = 50*detailScale;
